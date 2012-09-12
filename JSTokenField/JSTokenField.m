@@ -88,6 +88,7 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
     [_label setBackgroundColor:[UIColor clearColor]];
     [_label setTextColor:[UIColor colorWithRed:0.3 green:0.3 blue:0.3 alpha:1.0]];
     [_label setFont:[UIFont fontWithName:@"Helvetica Neue" size:17.0]];
+	
     
     [self addSubview:_label];
     
@@ -116,6 +117,9 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
                                              selector:@selector(handleTextDidChange:)
                                                  name:UITextFieldTextDidChangeNotification
                                                object:_textField];
+	
+	_allowsMultipleSelection = NO;
+	_allowsSelection = YES;
 }
 
 - (void)dealloc
@@ -235,7 +239,10 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 	CGRect currentRect = CGRectZero;
 	
 	[_label sizeToFit];
-	[_label setFrame:CGRectMake(WIDTH_PADDING, HEIGHT_PADDING, [_label frame].size.width, [_label frame].size.height + 3)];
+//	[_label setFrame:CGRectMake(WIDTH_PADDING, HEIGHT_PADDING, [_label frame].size.width, [_label frame].size.height + 3)];
+	CGPoint labelCenter = CGPointMake(CGRectGetMidX(_label.bounds)+(WIDTH_PADDING*2), 35.f/2.f);
+	_label.center = labelCenter;
+	
 	
 	currentRect.origin.x += _label.frame.size.width + _label.frame.origin.x + WIDTH_PADDING;
 	
@@ -292,7 +299,7 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 - (void)toggle:(id)sender
 {
 	JSTokenButton *token = (JSTokenButton *)sender;
-	if (NO == _allowsMultipleSelection) {
+	if (NO == _allowsMultipleSelection && _allowsSelection) {
 		for (JSTokenButton *otherToken in _tokens)
 		{
 			[otherToken setToggled:NO];
@@ -301,7 +308,7 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 		[token setToggled:YES];
 		[token becomeFirstResponder];
 	}
-	else {
+	else if(_allowsMultipleSelection) {
 		if (NO == token.toggled) {
 			token.toggled = YES;
 //			[token becomeFirstResponder];

@@ -39,6 +39,7 @@ extern NSString *const JSDeletedTokenKey;
 @interface JSTokenField : UIView <UITextFieldDelegate> 
 
 @property (nonatomic) BOOL allowsMultipleSelection;
+@property (nonatomic) BOOL allowsSelection;
 @property (nonatomic, readonly) UITextField *textField;
 @property (nonatomic, strong) UILabel *label;
 @property (nonatomic, readonly, copy) NSMutableArray *tokens;
