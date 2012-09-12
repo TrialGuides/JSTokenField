@@ -32,11 +32,7 @@
 
 @implementation JSTokenButton
 
-@synthesize toggled = _toggled;
-@synthesize normalBg = _normalBg;
-@synthesize highlightedBg = _highlightedBg;
-@synthesize representedObject = _representedObject;
-@synthesize parentField = _parentField;
+
 
 + (JSTokenButton *)tokenWithString:(NSString *)string representedObject:(id)obj
 {
@@ -80,13 +76,6 @@
 	}
 }
 
-- (void)dealloc
-{
-	self.representedObject = nil;
-	self.highlightedBg = nil;
-	self.normalBg = nil;
-    [super dealloc];
-}
 
 - (BOOL)becomeFirstResponder {
     BOOL superReturn = [super becomeFirstResponder];

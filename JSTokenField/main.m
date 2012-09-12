@@ -32,11 +32,11 @@
 
 int main(int argc, char *argv[])
 {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    @autoreleasepool {
 	
-	int retVal = UIApplicationMain(argc, argv, nil, NSStringFromClass([DemoAppDelegate class]));
-	
-	[pool release];
+		int retVal = UIApplicationMain(argc, argv, nil, NSStringFromClass([DemoAppDelegate class]));
+		
     
-	return retVal;
+		return retVal;
+	}
 }
