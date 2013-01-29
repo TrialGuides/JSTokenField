@@ -196,7 +196,7 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 
 - (void)deleteHighlightedToken
 {
-	for (int i = 0; i < [_tokens count]; i++)
+	for (int i = 0; i < (int)[_tokens count]; i++)
 	{
 		_deletedToken = [_tokens objectAtIndex:i];
 		if ([_deletedToken isToggled])
@@ -204,7 +204,7 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 			[_deletedToken removeFromSuperview];
 			[_tokens removeObject:_deletedToken];
 			
-			if ([self.delegate respondsToSelector:@selector(tokenField:didRemoveTokenAtIndex:)])
+			if ([self.delegate respondsToSelector:@selector(tokenField:didRemoveToken:representedObject:)])
 			{
 				NSString *tokenName = [_deletedToken titleForState:UIControlStateNormal];
 				[self.delegate tokenField:self didRemoveToken:tokenName representedObject:_deletedToken.representedObject];
