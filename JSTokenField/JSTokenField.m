@@ -82,8 +82,7 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 
 - (void)commonSetup {
     CGRect frame = self.frame;
-    [self setBackgroundColor:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0]];
-    
+//    [self setBackgroundColor:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0]];
     _label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, frame.size.height)];
     [_label setBackgroundColor:[UIColor clearColor]];
     [_label setTextColor:[UIColor colorWithRed:0.3 green:0.3 blue:0.3 alpha:1.0]];
@@ -350,6 +349,9 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 	{
 		[text insertString:ZERO_WIDTH_SPACE_STRING atIndex:0];
 		[_textField setText:text];
+	}
+	if ([self.delegate respondsToSelector:@selector(tokenFieldTextDidChange:)]) {
+		[self.delegate tokenFieldTextDidChange:self];
 	}
 }
 
